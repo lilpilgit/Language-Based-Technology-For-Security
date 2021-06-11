@@ -1,0 +1,26 @@
+// implicit flow
+
+l1 = false;
+l2 = false;
+l3 = false;
+l4 = false;
+l5 = false;
+l6 = false;
+
+if (h1) l1 = true;
+else skip;
+
+if (h2) l2 = true;
+else skip;
+
+if (h3) l3 = true;
+else skip;
+
+if (h4) l4 = true;
+else skip;
+
+if (h5) l5 = true;
+else skip;
+
+if (h6) l6 = true;
+else skip;

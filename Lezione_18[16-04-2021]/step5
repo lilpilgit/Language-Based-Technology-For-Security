@@ -1,0 +1,8 @@
+// implict flow come step 2 e step 4, ma usa il let
+
+let (x = h1) in { l1 = x; }
+let (x = h2) in { l2 = x; }
+let (x = h3) in { l3 = x; }
+let (x = h4) in { l4 = x; }
+let (x = h5) in { l5 = x; }
+let (x = h6) in { l6 = x; }

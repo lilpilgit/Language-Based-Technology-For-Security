@@ -1,0 +1,11 @@
+// implicit flow ma l'assegnamento avviene tramite la chiamata di procedura
+
+declare proc tt(in x : low, out y : low) y = true;
+declare proc ff(in x : low, out y : low) y = false;
+
+if (h1) tt(true,l1); else ff(false,l1);
+if (h2) tt(true,l2); else ff(false,l2);
+if (h3) tt(true,l3); else ff(false,l3);
+if (h4) tt(true,l4); else ff(false,l4);
+if (h5) tt(true,l5); else ff(false,l5);
+if (h6) tt(true,l6); else ff(false,l6);

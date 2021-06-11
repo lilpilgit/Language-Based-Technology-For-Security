@@ -1,0 +1,55 @@
+// implicit flow come step 2, ma usa le eccezioni 
+
+try { 
+  l1 = false; 
+  if(h1) 
+    skip; 
+  else 
+    throw; 
+  l1 = true;
+} catch { skip; }
+
+try { 
+  l2 = false; 
+  if(h2) 
+    skip; 
+  else 
+    throw; 
+  l2 = true;
+} catch { skip; }
+
+try { 
+  l3 = false; 
+  if(h3) 
+    skip; 
+  else 
+    throw; 
+  l3 = true;
+} catch { skip; }
+
+try { 
+  l4 = false; 
+  if(h4) 
+    skip; 
+  else 
+    throw; 
+  l4 = true;
+} catch { skip; }
+
+try { 
+  l5 = false; 
+  if(h5) 
+    skip; 
+  else 
+    throw; 
+  l5 = true;
+} catch { skip; }
+
+try { 
+  l6 = false; 
+  if(h6) 
+    skip; 
+  else 
+    throw; 
+  l6 = true;
+} catch { skip; }

@@ -1,0 +1,21 @@
+// il livello del contenuto dei puntatori è dichiarato come low => il valore dereferenziato può essere assegnato a variabili low
+
+declare ref hp : low; 
+
+ref hp = h1;
+l1 = deref(hp);
+
+ref hp = h2;
+l2 = deref(hp);
+
+ref hp = h3;
+l3 = deref(hp);
+
+ref hp = h4;
+l4 = deref(hp);
+
+ref hp = h5;
+l5 = deref(hp);
+
+ref hp = h6;
+l6 = deref(hp);

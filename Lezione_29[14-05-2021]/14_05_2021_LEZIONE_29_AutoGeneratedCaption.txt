@@ -1,0 +1,595 @@
+Quali sono
+i personaggi tipici di questi protocolli,
+sono alice e bob,
+poi c'è S che di solito il server
+quindi viene chiamato Sam,
+l' attaccante ha vari nomi,
+come abbiamo visto anche prima,
+i protocolli sono nella forma di
+sequenze di messaggi è
+una notazione informale che ci dice
+che A spedisce a B M uno dei
+problemi che poi vedremo nel seguito
+che crea questa notazione informale è
+il fatto che ci dica solo cosa viene
+scambiato e non si dilunghi troppo
+su cosa fa B in arrivo,
+mentre quello che fa B non è
+banale perché come dicevamo prima,
+B riceve messaggi che saranno tuple,
+le compone in modo da avere tutte le
+componenti, se ci sono encryption le va a
+decifrare e poi fa le sostituzioni di rito,
+ma come dicevamo prima,
+oltre a ricevere informazione
+totalmente nuova,
+che è quella che poi 
+andrà a legare alle sue variabili, quello
+che fa è ricevere delle informazioni che
+serve a confermare la bontà di ciò
+che ha ricevuto, la bontà del fatto
+che l'ha ricevuto da chi doveva ed
+è questo poi il passo delicato,
+quindi quello che si imputa a
+questo tipo 
+di modellazione degli scambi
+di messaggi tra protocolli,
+questa notazione informale ha come limite
+quello di lasciare impliciti
+i controlli che fa B in arrivo e
+spesso  il non essere
+espliciti su quello che succede,
+porta ad avere delle implementazioni
+che sono magari fallaci.
+Invece
+che il man in the middle io
+rappresento il wolf in the middle,
+per dire che nella favola che
+tutti conoscete di cappuccetto
+rosso quello che succede è che a
+cose normali dovrebbe andare
+la nipotina dalla nonna e non
+dovrebbe succedere nulla perché c'è
+la protezione del catenaccio,
+della porta del chiavistello
+no, quindi c'è una protezione
+crittografica se volete.
+Il problema è che il lupo
+fa un attacco man in the middle di
+impersonazione per cui si finge
+con la nonna cappuccetto rosso e
+questo gli consente di entrare senza
+rompere il chiavistello perché la porta viene
+aperta direttamente dalla nonna e
+successivamente se lo pensate come
+un protocollo la nonna viene
+impersonata nella seconda parte
+dal lupo che trae di nuovo in
+inganno la nipotina mangiandosela
+quindi se volete,
+per quanto buffo, perché c'è la favola,
+però questa è un po
+l'idea del tipo di
+attacco che può essere fatto
+su protocolli di questo genere,
+perché non occorre anche in questo caso
+anche nel secondo non occorre che
+il lupo rompa la crittografia.
+Come si fa a stabilire una
+chiave in un protocollo
+supponendo che allora chiaramente,
+se io avessi comunicazioni solo in chiaro,
+basta un nemico passivo
+per buttare all'aria tutto,
+ma questo naturalmente è stupido
+e quindi uno può pensare,
+vi faccio vedere solo proprio i primi lucidi,
+può pensare che A chieda ad S
+di comunicare in maniera sicura con
+B, questa è una variazione rispetto
+a quello che abbiamo visto di
+protocolli della rana e per
+farlo S sostanzialmente si prende
+lui l'incarico ed è trusted per
+questo di creare una nuova chiave
+di sessione per A e B che poi manda
+confezionata con la chiave
+che condivide con A
+e con quella che condivide con B
+manda ad A.
+Quello che succede è che
+A riceve il messaggio, prende la
+prima parte del messaggio che sa
+utilizzare dalla quale
+sa trarre la chiave di sessione,
+poi
+la seconda parte semplicemente
+per lei è opaca perché non
+la sa decifrare,
+ma la puoi inoltrare ed è la cosa che fa
+nel terzo messaggio a B.
+Ora questo
+protocollo quindi da un
+certo punto di vista sembrerebbe
+sicuro perché la chiave di sessione
+in ogni momento passa
+non in chiaro,
+ma passa protetta dalle chiavi di long term
+e quindi il problema
+con l'eavesdropping non ci dovrebbe essere,
+perché appunto abbiamo detto che
+assumiamo perfect cryptography.
+Il problema è che
+questa chiave non viene protetta o garantita da
+informazioni di contesto che servono
+a generare garanzia se volete e
+quindi supponendo che l' avversaria
+abbia un controllo completo sulla rete,
+può essere che ci sia un attacco in
+cui il nemico,
+in questo caso Charlie, C(B) vuol dire
+che si sta impersonando B, che C
+intercetti il messaggio di A
+e vedete che il messaggio ha la
+chiave protetta ma il nome del
+processo che dovrebbe indicare a B
+chi è che vuole parlare con lui è
+in chiaro questo vuol dire che è
+proprio una parte del messaggio sul
+quale l' attaccante può agire perché
+lo può ricevere e lo può sostituire
+con D che magari è amico suo, quello
+che succede è che a quel punto
+C nascondendosi questa volta
+sotto le spoglie di A, può
+mandare a B il messaggio sbagliato
+e quindi ingannare B che da lì in poi
+penserà di condividere il canale,
+cioè la chiave privata con D invece
+che con A e quindi potrebbe andare
+a dire cose diverse da quelle che
+dovrebbe.
+
+ Oppure ancora
+peggio quello che può succedere è che
+A spedisce a S: sono A voglio parlare
+con B messaggio 1 ma il nemico,
+queste sono due informazioni
+totalmente in chiaro (A,B),
+può intercettarle e alterarle
+mettendoci un'altro nome in chiaro che
+è C e il suo e questa è un po
+la situazione davvero di cappuccetto rosso,
+perché a questo punto S è
+legittimamente convinto di star creando una
+chiave di sessione condivisa per A e per C ,
+non per A e per B e quello che fa
+è che creerà una chiave
+condivisa per A e C che spedirà entrambi,
+cioè le spedirà in modo che possa essere
+letta da A e da C, legittimamente da C,
+perché qui si suppone che abbia
+una chiave condivisa con S,
+quindi sia un partecipante comunque
+del sistema, anche se disonesto.
+A
+questo punto C sempre come man in the
+middle spedirà ad A la chiave come
+A si aspetta e la chiave per C
+e la chiave che è quella sua e
+che A si aspetta di ricevere
+da mandare a B che chiaramente C
+intercetterà prima che possa
+arrivare a B. Quello che succede è che
+da lì in avanti,
+perché questo,
+naturalmente è un protocollo per stabilire
+una chiave di sessione e quindi poter
+comunicare in maniera sicura tra A e B
+da lì in poi,
+A spedirà dei messaggi a B che invece
+arriveranno a C e gli arriveranno senza
+nessuna necessità di
+alterare la chiave.
+Sono attacchi semantici perché quello
+che succede è
+che non c'è nessuna necessità di passare
+dall alterazione della chiave,
+perché è possibile,
+attraverso le informazioni di contorno,
+alterare il flusso delle comunicazioni,
+quindi basta  che
+i nomi passino in chiaro per permettere
+a C di fare questo attacco.
+Naturalmente 
+questo problema si può ammortizzare
+mettendo le informazioni sensibili
+all'interno dell'encryption,
+quindi in questo caso si parla
+di associazione, di binding,
+cioè importante che la chiave ad A venga
+certo crittografata ma associata
+all' entità con cui la deve condividere,
+come potete immaginare facendo
+questa variazione sul protocollo,
+quello che succede è che A ha la
+sicurezza di aver ricevuto la chiave
+che deve condividere con B. Quando
+A riceve qua la chiave,
+anche se C ci ha messo lo zampino,
+qui ci ritroverà C e quindi
+non potrà più essere ingannata,
+quindi questo è un modo
+per risolvere il problema,
+quindi come vedete non basta la
+crittografia va anche curato molto
+l'aspetto delle informazioni
+di contesto che l' accompagnano
+e neanche questo ci pone al
+riparo dalle situazione
+perché qui c'è un'altro problema
+che è un problema di freschezza,
+cioè A è sicuro che quello
+che riceve vada bene,
+ma e qui si entra a mettere un
+attimo in crisi l'ipotesi
+di perfect encryption,
+quello che succede è che B riceve
+questo pacchetto con
+dentro la chiave e sa anche che
+la chiave è stata creata da S
+per comunicare insieme ad A
+ma non essendo stato lui l' iniziatore del protocollo che
+invece è A non ha nessuna garanzia
+che questo sia un messaggio creato
+proprio da pochissimo e questo
+che tipo di problema potrebbe
+creare?
+Replay attack, perché nulla vieta al
+nemico di intercettare in una qualche
+sessione precedente quel messaggio lì
+a questo punto ha un notevole tempo a
+disposizione per 
+per fare un proprio attacco critta analitico
+quindi potrebbe compromettere la chiave
+K_AB e a questo punto potrebbe rilanciare
+questo messaggio come se fosse fresco
+B potrebbe cadere e a quel punto lui
+potrebbe di nuovo leggere i messaggi che
+che B spedisce A da intercettando
+lì quindi A non sarebbe coinvolto,
+ma quindi potrebbe entrare in possesso
+delle informazioni che B si sente
+di poter confidare ad A e quindi
+di nuovo il protocollo
+così come non funziona e ha bisogno
+di aggiungere ulteriori informazioni
+per dare freschezza e come vi dicevo prima,
+il tipico modo per per dare prove
+di freschezza è inserire un nonce, è un messaggio
+che può essere un numero,
+può essere un timestamp,
+qualcosa che faccia in modo che un
+messaggio venga legato ancorato se volete
+in maniera temporale a quel momento.
+Se vogliamo che anche B abbia la
+sua assicurazione di freschezza,
+il protocollo potrebbe essere
+rivoluzionato facendo che sia B a
+cominciare il protocollo mandando il
+suo nonce facendo sì che A si accodi
+mandando il suo e a questo punto
+il server può mandare a entrambi la
+chiave con tutte le associazioni del caso,
+quindi con il nome
+dell'altro principale coinvolto
+nella comunicazione
+e il nome del nonce in questa maniera,
+alla fine entrambi hanno la sicurezza
+che la comunicazione sia fresca,
+cioè recente e che la chiave sia
+condivisa effettivamente con l'altro
+legittimo partecipante al protocollo.
+Se poi uno vuole andare
+ancora più nel dettaglio esistono
+anche attacchi ancora più sottili
+di quelli che abbiamo visto fino a
+ora e che si basano sul fatto che di
+nuovo quello che viene scambiato
+nelle comunicazioni dei protocolli,
+alla fine,
+anche se noi lo vediamo nella notazione
+informale come N_A ed A codificato con K_B,
+in realtà arriva ed è una stringa di bit
+essendo una stringa di bit,
+chi riceve sa che è il primo
+passo del protocollo
+lo interpreta come queste la
+stringa di bit che mi rappresenta
+il nonce criptato con
+la chiave che posseggo invece
+ci sono dei casi in cui il nemico,
+approfittando di tutti
+i messaggi che ha ricevuto
+accumulato li possa fare un reply
+attack di un vecchio messaggio
+che è magari codificato con la stessa
+chiave di quello che vuole alterare,
+ma che è strutturato all'interno in
+maniera diversa e questo vuol dire che,
+per esempio,
+può far credere a chi lo riceve che
+la seconda parte dell' encryption che
+va a decifrare contenga la chiave
+invece magari lui ha mandato come in
+questo caso una stringa di valori
+che sono tutt'altro che segreti tipo
+un noce e B e questo succede quando
+il nemico è abbastanza fortunato per
+avere dei messaggi intercettati
+che hanno la stessa lunghezza in
+bit dei messaggi che si aspetta
+il legittimo partecipante al protocollo e
+quindi queste si chiamano type flow attacks,
+quindi uno si aspetta una cosa e
+quindi io faccio sempre l'esempio
+del portachiavi per cui se io
+non voglio
+mettere la moneta nel carrello
+del supermercato ci posso
+mettere una cosa che ha la stessa forma,
+ma che inganna perché entra
+perfettamente lì dentro,
+quindi questo è un problema
+di parsing di chi riceve il
+il messaggio quindi,
+come vedete,
+diciamo le tipologie di
+messaggi sono moltissimi,
+molto spesso i problemi sono dovuti,
+come dicevamo,
+al fatto che le specifiche sono informali e
+invece sarebbe
+bene che non lo fossero,
+ci sono varie tipi di attacchi.
+Un'altra cosa che ha
+a che fare con il tipo di assunzioni implicite,
+per esempio, è il fatto che
+a volte non specificando che
+cosa deve fare un processo
+in ricezione
+si possono omettere dei controlli,
+ora qui non vi sto a elencare o
+dettagliare il protocollo ma in
+questo caso il server nel messaggio
+2' dovrebbe controllare che I,
+il numero di sessione e i due nomi
+di principali che dovrebbero
+rappresentare quelli per cui
+sta facendo il servizio di
+intermediazione coincidono nella
+parte in chiaro e nelle due chiavi
+crittografate all'interno
+e se non lo fa è passibile di
+essere attaccato perché il nemico
+la parte in chiaro la può alterare
+quindi questo è semplicemente
+per dire che anche la
+descrizione di quello che deve
+fare in ricezione il partecipante
+al protocollo andrebbe esplicitato
+perché laddove non succede può essere
+che ci siano delle azioni che non
+sono fatte nella maniera corretta.
+Quindi ci sono tutta una serie di regole
+di sicurezza per l'
+ingegnerizzazione prudente
+diciamo dei protocolli e sostanzialmente
+l'idea è che bisogna
+essere molto attenti non solo a scambiare
+le informazioni che servono a nuovi canali,
+a nuove chiavi eccetera,
+ma molto attenti anche alle
+informazioni di contesto
+che servono a dare le garanzie di freschezza,
+ma anche di binding rispetto  al principale
+che deve comunicare con noi. 
+
+A questo punto posso
+farvi vedere un modo 
+per applicare delle tecniche di
+analisi statica alla sicurezza,
+in particolare nel contesto del
+PI calcolo del motivo per cui ve l'ho
+introdotto per cominciare a vedere,
+almeno in astratto, problemi di sicurezza.
+Vedremo
+un'analisi di tipo control flow e
+si tratta di analisi statica, cioè
+facciamo un pochino
+di premesse.
+Come faccio a studiare il
+comportamento di un sistema complesso
+ quindi fatto da vari agenti?
+Quello che succede,
+come abbiamo visto fino a ora,
+io prendo il mio sistema,
+vedo quali sono le azioni a top level
+e vedo quali sono tutte le possibili
+le sue evoluzioni a tempo dinamico
+questo vuol dire sostanzialmente
+che vado a costruire
+il grafo del sistema di
+transizione etichettato LTS,
+ora vi potete immaginare che
+aumentando la complessità delle
+interazioni  tra
+i partecipanti del sistema,
+questo grafo diventi abbastanza
+complesso e quindi il
+fenomeno che si chiama state explosion,
+cioè l'esplosione degli stati,
+cioè più sono le possibilità,
+più sono gli interleaving delle azioni,
+anche singole indipendenti uno dall'altro
+e più questo grafo è complicato da studiare
+perché diventa grosso.
+Uno puoi venire a patti con la
+precisione della possibilità di
+studiare proprio esattamente tutti i
+possibili modi ed evoluzione del sistema,
+andando a fare un'analisi statica.
+Un'analisi statica in qualche maniera cerca di
+prevedere il comportamento di un sistema
+senza eseguirlo,
+ma lo si giudica da come scritto
+quindi dalla specifica che presenta e
+quindi c'è una sorta di negoziazione per cui perdo
+precisione quindi approssimo le mie
+risposte ma guadagno perché non
+ho bisogno di infognarmi
+nel problema della analisi
+di tutti i possibili comportamenti.
+Quindi quelle che vedremo sono delle
+approssimazioni di tipo conservativo 
+e quindi
+ci daranno comunque
+informazioni sul comportamento,
+ma certo non potrò prevedere proprio
+precisamente quello che succede quindi,
+l'idea è che io voglio ottenere
+delle informazioni sul comportamento
+dinamico dei processi senza spendere
+quanto spenderei per andare a vedere.
+Quali sono le alternative?
+Scherzosamente avere la palla di vetro,
+quindi non ce l'abbiamo, ma guardare
+come dicevamo alle descrizioni
+del sistema e quindi
+andare a sfruttare quelle che si
+chiamano
+tecniche di analisi statica sta
+proprio per andare a vedere le
+cose a tempo di compilazione,
+cioè tempo statico prima
+di fare l'esecuzione,
+mentre altre tecniche invece sono dinamiche
+e mi vanno ad analizzare proprio tutti i
+comportamenti che possono
+emergere a tempo dinamico.
+Le analisi di tipo statico sono in
+varie tipologie e voi avete visto
+sicuramente i type system e questo
+è di nuovo un modo
+statico di procedere perché io
+decido la bontà
+di un processo o il
+rispetto di una proprietà
+senza far evolvere il sistema,
+ma semplicemente vedendo se vengono
+rispettati alcuni vincoli che mi
+garantiscono che questo succederà.
+Ci sarà poi di solito nella
+analisi statica quello che succede che
+io analizzo tutto a tempo statico
+e poi trovo un modo per mettere
+in collegamento ciò che stabilisco a tempo statico
+rispetto a ciò che succede a tempo dinamico
+quindi ci sono sempre
+dei risultati che mi mettono in
+relazione la proprietà statica con
+la proprietà dinamica e anche il
+fatto e questo è importante che se
+io attraverso l'analisi statica mi
+prefiguro una certa previsione di
+comportamento a tempo dinamico questa
+previsione mi basta farlo una volta
+sola osservando il processo di partenza,
+la specifica del processo di partenza,
+però
+perché questa abbia senso deve essere
+vero che ogni volta che faccio un passo
+nell'evoluzione dinamica la
+mia previsione non cambi,
+cioè continui a rimanere valida.
+
+Quindi c'è una sorta di come vedete qua,
+di confronto,
+per cui da una parte sul lato statico
+io mi  limito ad analizzare la
+specifica e quindi per fare questo ho
+il vantaggio di avere una complessità
+bassa e quindi di avere degli strumenti
+che la implementano,
+che non costano tanto termina
+sempre e però è approssimata e
+in maniera del tutto simmetrica
+se invece analizzo il comportamento
+in maniera dinamica lo analizzo
+quindi tutte le possibili evoluzioni
+e quindi devo spendere tanto in
+termini di complessità e quindi di
+implementazioni di eventuali analisi
+automatizzate e poi non terminare poi,
+come dicevo prima,
+cioè ha senso che io analizzi tutto
+staticamente se ho un modo di dire che
+la proprietà che io vedo a livello
+statico implichi che questa proprietà
+è goduta anche sul lato
+dinamico.
+Quello che fa in particolare
+la CFA che vedremo,
+ma comunque tutte le analisi statiche
+di tipo over approximation,
+cercheranno di prevedere quello che può
+succedere in tutti i possibili modi,
+anche in quelle che probabilmente a
+tempo dinamico non saranno possibili
+quindi vado a prevedere più
+di quello che può succedere.
+Questo se tenete presente
+il disegno vuol dire
+che se la mia approssimazione
+prevederà il possibile
+affacciarsi dell'evento
+e, in realtà,
+siccome sto sovrappassimando potrebbe
+far parte della parte azzurra chiara nel
+disegno sopra,
+quindi,
+potrebbe essere una cosa che
+l'analisi prevede,
+ma che non succederà a tempo dinamico.
+Allo stesso tempo però,
+se invece un evento e non viene inclusa nella
+mia previsione che largheggia se volete,
+allora potrò avere invece la
+sicurezza che quella non avverrà mai
+quell'evento e non si
+verificherà mai a tempo dinamico,
+quindi,
+questa è l'idea della over approximation,
+cioè io farò delle previsioni molto
+ampie che potranno quindi includere
+degli elementi che potrebbero
+davvero non essere
+inclusi nell'evoluzione dinamica
+perché faccio approssimazione
+però allo stesso tempo,
+se non trovo un evento
+nell approssimazione
+alla larga vuol dire che quello davvero non
+potrà succedere a tempo di esecuzione.
+Se avete un if, cioè se avete un
+branch per cui può succedere
+una cosa o ne può succedere un'altra,
+quello che fa l'approssimazione
+over è mettercele tutti e due perché
+non lo sa in partenza quale dei due
+sarà incluso e quindi si continuerà
+a propagare un sacco di informazione
+e un sacco di eventi che potrebbero
+non essere mai raggiunti,
+diciamo se volete a tempo dinamico.
+

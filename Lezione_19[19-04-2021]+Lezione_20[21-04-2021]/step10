@@ -1,0 +1,7 @@
+// come step 9, ma invece che il tempo misuriamo il numero di step in cui il programma termina
+l1 = true;
+l2 = false;
+l3 = true;
+l4 = false;
+l5 = false;
+l6 = true;

@@ -1,0 +1,10 @@
+// la memoria high level viene inizializzata sempre con lo stesso valore
+// si possono provare tutti i casi possibili
+// oppure time leak ( while(h1) skip; )
+
+l1 = true;
+l2 = false;
+l3 = true;
+l4 = false;
+l5 = true;
+l6 = true;

@@ -1,0 +1,34 @@
+// se hi è true, allora la[true] = la[hi] = true
+// se hi è false, allora la[true] = false
+
+declare array la : low;
+
+la[false] = true;
+la[true] = false;
+la[h1] = true;
+l1 = la[true];
+  
+la[false] = true;
+la[true] = false;
+la[h2] = true;
+l2 = la[true];
+
+la[false] = true;
+la[true] = false;
+la[h3] = true;
+l3 = la[true];
+
+la[false] = true;
+la[true] = false;
+la[h4] = true;
+l4 = la[true];
+
+la[false] = true;
+la[true] = false;
+la[h5] = true;
+l5 = la[true];
+
+la[false] = true;
+la[true] = false;
+la[h6] = true;
+l6 = la[true];
